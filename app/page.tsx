@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Footer from "./components/Footer";
 import Newsletter from "./components/Newsletter";
 import BestSellers from "./components/BestSellers";
