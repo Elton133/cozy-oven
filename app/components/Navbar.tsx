@@ -52,14 +52,15 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import { Menu, MapPin, X } from "lucide-react";
+import { Menu, MapPin, X, ShoppingCart } from "lucide-react";
 import PillNav from "./PillNav";
-import logo from "../../public/next.svg"; 
+import { useCart } from "../context/CartContext"; 
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen((prev) => !prev);
+  const { getCartCount } = useCart();
+  const cartCount = getCartCount();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between px-4 md:px-8 py-4 backdrop-blur-lg bg-white/80 shadow-sm">
@@ -87,7 +88,7 @@ export default function Navbar() {
         />
       </div>
 
-      {/* Right: Location + Menu */}
+      {/* Right: Location + Cart + Menu */}
       <div className="flex items-center gap-2 md:gap-4">
         {/* Location pill */}
         <div className="hidden sm:flex items-center gap-2 bg-gray-100/80 backdrop-blur-sm text-gray-700 rounded-full px-3 md:px-4 py-1 text-xs md:text-sm hover:bg-gray-200/80 transition">
@@ -95,6 +96,19 @@ export default function Navbar() {
           <span className="hidden md:inline">Accra, Ghana</span>
           <span className="md:hidden">Accra</span>
         </div>
+
+        {/* Cart icon with counter */}
+        <button
+          className="relative p-2 rounded-full hover:bg-gray-100/80 transition"
+          aria-label="Shopping Cart"
+        >
+          <ShoppingCart className="w-5 h-5" />
+          {cartCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              {cartCount}
+            </span>
+          )}
+        </button>
 
         {/* Menu dropdown */}
         <div className="relative">
