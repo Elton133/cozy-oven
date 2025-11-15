@@ -147,7 +147,7 @@ export default function BestSellers() {
         {/* Add to Cart Button */}
         <button
           onClick={(e) => handleAddToCart(e, product)}
-          className="flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+          className="flex items-center justify-center gap-2 bg-[#2A2C22] hover:bg-[#2A2C22] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
         >
           <ShoppingCart className="w-4 h-4" />
           Add to Cart

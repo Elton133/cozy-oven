@@ -105,7 +105,7 @@ export default function Navbar() {
         >
           <ShoppingCart className="w-5 h-5" />
           {cartCount > 0 && (
-            <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 bg-[#2A2C22] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
               {cartCount}
             </span>
           )}
