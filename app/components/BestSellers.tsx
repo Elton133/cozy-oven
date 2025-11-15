@@ -119,7 +119,7 @@ export default function BestSellers() {
           Best Sellers
         </h2>
         
-       <div
+ <div
   ref={scrollRef}
   className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
@@ -144,7 +144,7 @@ export default function BestSellers() {
         <h3 className="text-white text-md font-bold mb-1">{product.name}</h3>
         <p className="text-white/90 text-md font-semibold mb-3">{product.price}</p>
         
-        {/* Add to Cart Button */}
+        {/* Add to Cart Button - slides up on hover */}
         <button
           onClick={(e) => handleAddToCart(e, product)}
           className="flex items-center justify-center gap-2 bg-[#2A2C22] hover:bg-[#2A2C22] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
