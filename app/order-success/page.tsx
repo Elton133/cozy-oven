@@ -5,12 +5,10 @@ import { CheckCircle2 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useCart } from "../context/CartContext";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 
-
-
-export default function OrderSuccessPage() {
-   const { clearCart } = useCart();
+function OrderSuccessContent() {
+  const { clearCart } = useCart();
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -18,13 +16,12 @@ export default function OrderSuccessPage() {
   const orderNumber = searchParams.get("orderNumber") || "CO12345678";
 
   
-    useEffect(() => {
-      clearCart();
-    }, []);
+  useEffect(() => {
+    clearCart();
+  }, [clearCart]);
 
   return (
     <>
-      <Navbar />
       <main className="min-h-screen pt-24 pb-16 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-lg shadow-sm p-8 md:p-12 text-center">
@@ -98,6 +95,21 @@ export default function OrderSuccessPage() {
         </div>
       </main>
       <Footer />
+    </>
+  );
+}
+
+export default function OrderSuccessPage() {
+  return (
+    <>
+      <Navbar />
+      <Suspense fallback={
+        <main className="min-h-screen pt-24 pb-16 bg-gray-50 flex items-center justify-center">
+          <div className="text-gray-600">Loading...</div>
+        </main>
+      }>
+        <OrderSuccessContent />
+      </Suspense>
     </>
   );
 }

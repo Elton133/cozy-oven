@@ -5,24 +5,28 @@ import { useRouter } from "next/navigation";
 import { Check } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import AuthModal from "../components/AuthModal";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 type DeliveryMethod = "delivery" | "pickup";
 type CheckoutStep = "info" | "delivery" | "payment" | "review";
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { cart, getCartTotal, clearCart } = useCart();
+  const { cart, getCartTotal } = useCart();
+  const { isAuthenticated, user } = useAuth();
   const [currentStep, setCurrentStep] = useState<CheckoutStep>("info");
+  const [authModalOpen, setAuthModalOpen] = useState(false);
   const [deliveryFee] = useState(10);
   const taxRate = 0.125;
 
-  // Form state
-  const [customerInfo, setCustomerInfo] = useState({
-    name: "",
-    email: "",
+  // Form state - pre-fill with user data if authenticated
+  const [customerInfo, setCustomerInfo] = useState(() => ({
+    name: user?.fullName || "",
+    email: user?.email || "",
     phone: "",
-  });
+  }));
   const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>("delivery");
   const [deliveryDetails, setDeliveryDetails] = useState({
     address: "",
@@ -77,6 +81,11 @@ useEffect(() => {
   };
 
   const handlePlaceOrder = () => {
+    // Check if user is authenticated before placing order
+    if (!isAuthenticated) {
+      setAuthModalOpen(true);
+      return;
+    }
     router.push("/order-success");
   };
 
@@ -88,6 +97,16 @@ useEffect(() => {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
             Checkout
           </h1>
+
+          {/* Auth requirement notice */}
+          {!isAuthenticated && (
+            <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-800">
+                ℹ️ You&apos;ll need to sign in before placing your order. Don&apos;t worry, we&apos;ll save your
+                progress!
+              </p>
+            </div>
+          )}
 
           {/* Progress Indicator */}
           <div className="mb-8">
@@ -506,6 +525,9 @@ useEffect(() => {
         </div>
       </main>
       <Footer />
+      
+      {/* Auth Modal */}
+      <AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
     </>
   );
 }

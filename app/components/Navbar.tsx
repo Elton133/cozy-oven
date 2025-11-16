@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, MapPin, X, ShoppingCart } from "lucide-react";
+import { Menu, MapPin, X, ShoppingCart, User, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 import CartDrawer from "./CartDrawer";
+import AuthModal from "./AuthModal";
 import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
@@ -17,14 +19,28 @@ const navLinks = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const { getCartCount } = useCart();
+  const { isAuthenticated, user, logout } = useAuth();
   const cartCount = getCartCount();
 
   const handleCartClick = () => {
     if (cartCount > 0) {
       setCartDrawerOpen(true);
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    setProfileMenuOpen(false);
+    setMenuOpen(false);
+  };
+
+  const handleAuthClick = () => {
+    setAuthModalOpen(true);
+    setProfileMenuOpen(false);
   };
 
   return (
@@ -51,7 +67,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right: Location + Cart + Menu */}
+        {/* Right: Location + Cart + Profile + Menu */}
         <div className="flex items-center gap-2 md:gap-4">
           {/* Location pill */}
           <div className="hidden sm:flex items-center gap-2 bg-gray-100/80 backdrop-blur-sm text-gray-700 rounded-full px-3 md:px-4 py-1 text-xs md:text-sm hover:bg-gray-200/80 transition">
@@ -74,6 +90,51 @@ export default function Navbar() {
             )}
           </button>
 
+          {/* Profile icon with dropdown (Desktop) */}
+          <div className="relative hidden md:block">
+            <button
+              onClick={() => setProfileMenuOpen(!profileMenuOpen)}
+              className="p-2 rounded-full hover:bg-gray-100/80 transition"
+              aria-label="Profile"
+            >
+              <User className="w-5 h-5" />
+            </button>
+
+            {profileMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-lg border rounded-lg shadow-lg text-sm overflow-hidden z-50">
+                {isAuthenticated ? (
+                  <>
+                    <div className="px-4 py-3 border-b border-gray-200">
+                      <p className="font-semibold text-gray-900">{user?.fullName}</p>
+                      <p className="text-xs text-gray-500 truncate">{user?.email}</p>
+                    </div>
+                    <Link
+                      href="/orders"
+                      onClick={() => setProfileMenuOpen(false)}
+                      className="block px-4 py-2 hover:bg-gray-50 text-gray-700"
+                    >
+                      My Orders
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-50 flex items-center gap-2"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={handleAuthClick}
+                    className="w-full text-left px-4 py-2 hover:bg-gray-50 text-gray-700"
+                  >
+                    Sign In / Sign Up
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+
           {/* Mobile Menu Toggle */}
           <button
             onClick={toggleMenu}
@@ -82,25 +143,6 @@ export default function Navbar() {
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-
-          {/* Desktop Menu dropdown */}
-          <div className="relative hidden md:block">
-            {/* <button
-              onClick={toggleMenu}
-              className="p-2 rounded-full hover:bg-gray-100/80 transition"
-              aria-label="Menu"
-            >
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button> */}
-
-            {menuOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white/95 backdrop-blur-lg border rounded-lg shadow-lg text-sm overflow-hidden z-50">
-                <button className="w-full text-left px-4 py-2 hover:bg-gray-50">View Cart</button>
-                <button className="w-full text-left px-4 py-2 hover:bg-gray-50">Place Order</button>
-                <button className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-50">Sign Out</button>
-              </div>
-            )}
-          </div>
         </div>
       </nav>
 
@@ -168,32 +210,46 @@ export default function Navbar() {
 
               {/* Actions */}
               <div className="mt-6 flex flex-col w-full gap-4">
-                <motion.button
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navLinks.length * 0.08 + 0.1 }}
-                  className="text-lg py-3 rounded-xl bg-gray-100 hover:bg-gray-200 transition"
-                >
-                  View Cart
-                </motion.button>
+                {isAuthenticated ? (
+                  <>
+                    <div className="px-4 py-3 bg-gray-100 rounded-xl">
+                      <p className="font-semibold text-gray-900">{user?.fullName}</p>
+                      <p className="text-xs text-gray-500">{user?.email}</p>
+                    </div>
+                    <motion.button
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: navLinks.length * 0.08 + 0.1 }}
+                      onClick={() => {
+                        setMenuOpen(false);
+                      }}
+                      className="text-lg py-3 rounded-xl bg-gray-100 hover:bg-gray-200 transition"
+                    >
+                      My Orders
+                    </motion.button>
 
-                <motion.button
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navLinks.length * 0.08 + 0.15 }}
-                  className="text-lg py-3 rounded-xl bg-gray-100 hover:bg-gray-200 transition"
-                >
-                  Place Order
-                </motion.button>
-
-                <motion.button
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navLinks.length * 0.08 + 0.2 }}
-                  className="text-lg py-3 rounded-xl text-red-600 bg-red-50 hover:bg-red-100 transition"
-                >
-                  Sign Out
-                </motion.button>
+                    <motion.button
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: navLinks.length * 0.08 + 0.15 }}
+                      onClick={handleLogout}
+                      className="text-lg py-3 rounded-xl text-red-600 bg-red-50 hover:bg-red-100 transition flex items-center justify-center gap-2"
+                    >
+                      <LogOut className="w-5 h-5" />
+                      Sign Out
+                    </motion.button>
+                  </>
+                ) : (
+                  <motion.button
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: navLinks.length * 0.08 + 0.1 }}
+                    onClick={handleAuthClick}
+                    className="text-lg py-3 rounded-xl bg-[#2A2C22] text-white hover:bg-[#1a1c12] transition"
+                  >
+                    Sign In / Sign Up
+                  </motion.button>
+                )}
               </div>
             </div>
           </motion.div>
@@ -203,6 +259,9 @@ export default function Navbar() {
 
       {/* Cart Drawer */}
       <CartDrawer isOpen={cartDrawerOpen} onClose={() => setCartDrawerOpen(false)} />
+      
+      {/* Auth Modal */}
+      <AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
     </>
   );
 }
