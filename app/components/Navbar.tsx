@@ -1,54 +1,3 @@
-// // apps/client/components/Navbar.jsx
-// "use client";
-
-// import { useState } from 'react';
-// import { Coffee, Menu, X, MapPin } from 'lucide-react';
-
-
-// const navLinks = [
-//   { name: 'Home', icon: <Coffee /> },
-//   { name: 'Shop', icon: <Menu /> },
-//   { name: 'Orders', icon: <X /> },
-//   { name: 'Contact', icon: <MapPin /> },
-// ];
-
-// export default function Navbar() {
-//   const [menuOpen, setMenuOpen] = useState(false);
-
-//   return (
-//     <nav className="fixed top-0 w-full z-50 px-6 py-4 bg-white/30 backdrop-blur-md shadow-md flex justify-between items-center">
-//       <div className="text-2xl font-bold">Cozy Oven</div>
-      
-//       {/* Desktop */}
-//       <ul className="hidden md:flex gap-4">
-//         {navLinks.map(link => (
-//           <li key={link.name} className="flex items-center gap-1 px-4 py-2 rounded-full hover:bg-white/40 transition">
-//             {link.icon} {link.name}
-//           </li>
-//         ))}
-//       </ul>
-
-//       {/* Mobile Hamburger */}
-//       <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-//         <span className="block w-6 h-0.5 bg-black mb-1"></span>
-//         <span className="block w-6 h-0.5 bg-black mb-1"></span>
-//         <span className="block w-6 h-0.5 bg-black"></span>
-//       </button>
-
-//       {menuOpen && (
-//         <ul className="absolute top-full right-0 mt-2 bg-white/30 backdrop-blur-md rounded-xl shadow-lg py-2 w-40 flex flex-col">
-//           {navLinks.map(link => (
-//             <li key={link.name} className="flex items-center gap-2 px-4 py-2 hover:bg-white/40 rounded-lg">
-//               {link.icon} {link.name}
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-//     </nav>
-//   );
-// }
-
-
 "use client";
 
 import { useState } from "react";
@@ -56,6 +5,7 @@ import { Menu, MapPin, X, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "../context/CartContext";
 import CartDrawer from "./CartDrawer";
+import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -135,13 +85,13 @@ export default function Navbar() {
 
           {/* Desktop Menu dropdown */}
           <div className="relative hidden md:block">
-            <button
+            {/* <button
               onClick={toggleMenu}
               className="p-2 rounded-full hover:bg-gray-100/80 transition"
               aria-label="Menu"
             >
               {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+            </button> */}
 
             {menuOpen && (
               <div className="absolute right-0 mt-2 w-40 bg-white/95 backdrop-blur-lg border rounded-lg shadow-lg text-sm overflow-hidden z-50">
@@ -155,7 +105,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Full-Screen Menu */}
-      {menuOpen && (
+      {/* {menuOpen && (
         <div className="fixed inset-0 z-40 md:hidden bg-white flex flex-col items-center justify-center">
           {navLinks.map((link) => (
             <Link
@@ -173,7 +123,83 @@ export default function Navbar() {
             <button className="text-lg px-6 py-2 text-red-600 hover:bg-gray-50 rounded">Sign Out</button>
           </div>
         </div>
+      )} */}
+       (
+    <AnimatePresence>
+      {menuOpen && (
+        <motion.div
+          key="backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
+          onClick={() => setMenuOpen(false)}
+        >
+          {/* Menu Panel */}
+          <motion.div
+            key="panel"
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-8 pt-12 shadow-xl"
+            onClick={(e) => e.stopPropagation()} // prevent closing on content click
+          >
+            {/* Links */}
+            <div className="flex flex-col items-center w-full gap-6">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ delay: i * 0.08 }}
+                >
+                  <Link
+                    href={link.href}
+                    className="text-2xl font-semibold text-gray-900 hover:text-[#2A2C22] transition-colors"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+
+              {/* Actions */}
+              <div className="mt-6 flex flex-col w-full gap-4">
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navLinks.length * 0.08 + 0.1 }}
+                  className="text-lg py-3 rounded-xl bg-gray-100 hover:bg-gray-200 transition"
+                >
+                  View Cart
+                </motion.button>
+
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navLinks.length * 0.08 + 0.15 }}
+                  className="text-lg py-3 rounded-xl bg-gray-100 hover:bg-gray-200 transition"
+                >
+                  Place Order
+                </motion.button>
+
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navLinks.length * 0.08 + 0.2 }}
+                  className="text-lg py-3 rounded-xl text-red-600 bg-red-50 hover:bg-red-100 transition"
+                >
+                  Sign Out
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       )}
+    </AnimatePresence>
 
       {/* Cart Drawer */}
       <CartDrawer isOpen={cartDrawerOpen} onClose={() => setCartDrawerOpen(false)} />

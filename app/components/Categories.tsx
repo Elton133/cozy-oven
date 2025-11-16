@@ -195,6 +195,8 @@ import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ProductQuickView from "./ProductQuickView";
 import type { Product } from "../context/CartContext";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 type Category = "Cookies" | "Brownies" | "Cakes";
 
@@ -455,12 +457,12 @@ export default function Categories() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex gap-8 mb-8">
+          <div className="flex md:gap-8 gap-4 mb-8">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`text-3xl font-bold transition-colors relative ${
+                className={`md:text-3xl text-2xl font-bold transition-colors relative ${
                   activeCategory === category
                     ? "text-[#2A2C22]"
                     : "text-gray-400 hover:text-gray-600"
@@ -476,7 +478,7 @@ export default function Categories() {
                 />
               )}
 
-              </button>
+              </button> 
             ))}
           </div>
 

@@ -73,10 +73,10 @@ export default function ProductQuickView({ isOpen, onClose, product }: ProductQu
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 bottom-0 w-full md:w-[500px] bg-white z-50 shadow-2xl flex flex-col"
+            className="fixed right-0 top-0 bottom-0 w-full md:w-[400px] bg-white z-50 shadow-2xl flex flex-col rounded-l-2xl"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <h2 className="text-2xl font-bold">Quick View</h2>
               <button
                 onClick={onClose}
@@ -160,7 +160,7 @@ export default function ProductQuickView({ isOpen, onClose, product }: ProductQu
                       <button
                         key={size}
                         onClick={() => setSelectedSize(size)}
-                        className={`px-4 py-2 rounded-lg border-2 font-medium transition-colors ${
+                        className={`px-4 py-2 rounded-full border-2 font-medium transition-colors ${
                           selectedSize === size
                             ? "border-[#2A2C22] bg-[#2A2C22] text-white"
                             : "border-gray-300 hover:border-gray-400"
@@ -175,14 +175,14 @@ export default function ProductQuickView({ isOpen, onClose, product }: ProductQu
             </div>
 
             {/* Footer - Fixed */}
-            <div className="border-t p-6 bg-white">
+            <div className="border-t border-gray-200 p-6 bg-white">
               {/* Quantity and Add to Cart */}
               <div className="flex items-center gap-4 mb-4">
                 {/* Quantity Selector */}
-                <div className="flex items-center border-2 border-gray-300 rounded-lg">
+                <div className="flex items-center border-2 border-gray-300 rounded-full">
                   <button
                     onClick={decrementQuantity}
-                    className="p-3 hover:bg-gray-100 transition"
+                    className="p-3 hover:bg-gray-100 transition rounded-full"
                     aria-label="Decrease quantity"
                   >
                     <Minus className="w-4 h-4" />
@@ -190,7 +190,7 @@ export default function ProductQuickView({ isOpen, onClose, product }: ProductQu
                   <span className="px-6 font-semibold text-lg">{quantity}</span>
                   <button
                     onClick={incrementQuantity}
-                    className="p-3 hover:bg-gray-100 transition"
+                    className="p-3 hover:bg-gray-100 rounded-full transition"
                     aria-label="Increase quantity"
                   >
                     <Plus className="w-4 h-4" />
@@ -200,7 +200,7 @@ export default function ProductQuickView({ isOpen, onClose, product }: ProductQu
                 {/* Add to Cart Button */}
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 flex items-center justify-center gap-2 bg-[#2A2C22] hover:bg-[#3A3C32] text-white font-semibold py-3 rounded-lg transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 bg-[#2A2C22] hover:bg-[#3A3C32] text-white font-semibold py-3 rounded-full transition-colors hover:cursor-pointer"
                 >
                   <ShoppingCart className="w-5 h-5" />
                   Add to Cart
@@ -209,7 +209,7 @@ export default function ProductQuickView({ isOpen, onClose, product }: ProductQu
 
               {/* View Full Details Link */}
               <Link href={`/product/${product.id}`} onClick={onClose}>
-                <button className="w-full border-2 border-[#2A2C22] text-[#2A2C22] font-semibold py-3 rounded-lg hover:bg-[#2A2C22] hover:text-white transition-colors">
+                <button className="w-full border-2 border-[#2A2C22] text-[#2A2C22] font-semibold py-3 rounded-full hover:bg-[#2A2C22] hover:text-white transition-colors hover:cursor-pointer">
                   View Full Details
                 </button>
               </Link>

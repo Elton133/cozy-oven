@@ -194,7 +194,7 @@ useEffect(() => {
                   <div className="flex gap-4">
                     <button
                       onClick={() => setDeliveryMethod("delivery")}
-                      className={`flex-1 py-3 px-4 rounded-lg border-2 font-semibold transition-colors ${
+                      className={`flex-1 py-3 px-4 rounded-full border-2 font-semibold transition-colors ${
                         deliveryMethod === "delivery"
                           ? "border-[#2A2C22] bg-orange-50 text-[#2A2C22]"
                           : "border-gray-300 text-gray-700 hover:border-gray-400"
@@ -204,7 +204,7 @@ useEffect(() => {
                     </button>
                     <button
                       onClick={() => setDeliveryMethod("pickup")}
-                      className={`flex-1 py-3 px-4 rounded-lg border-2 font-semibold transition-colors ${
+                      className={`flex-1 py-3 px-4 rounded-full border-2 font-semibold transition-colors ${
                         deliveryMethod === "pickup"
                           ? "border-[#2A2C22] bg-orange-50 text-[#2A2C22]"
                           : "border-gray-300 text-gray-700 hover:border-gray-400"
@@ -483,21 +483,21 @@ useEffect(() => {
           <div className="flex gap-4">
             <button
               onClick={handleBack}
-              className="flex-1 border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors"
+              className="flex-1 border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-full transition-colors hover:cursor-pointer hover:bg-gray-100"
             >
               Back
             </button>
             {currentStep === "review" ? (
               <button
                 onClick={handlePlaceOrder}
-                className="flex-1 bg-[#2A2C22] hover:bg-[#2A2C22] text-white font-bold py-3 px-6 rounded-lg transition-colors"
+                className="flex-1 bg-[#2A2C22] hover:bg-[#2A2C22] text-white font-bold py-3 px-6 rounded-full transition-colors hover:cursor-pointer"
               >
                 Place Order
               </button>
             ) : (
               <button
                 onClick={handleNext}
-                className="flex-1 bg-[#2A2C22] hover:bg-[#2A2C22] text-white font-bold py-3 px-6 rounded-lg transition-colors"
+                className="flex-1 bg-[#2A2C22] hover:bg-[#2A2C22] text-white font-bold py-3 px-6 rounded-full transition-colors hover:cursor-pointer"
               >
                 Continue
               </button>

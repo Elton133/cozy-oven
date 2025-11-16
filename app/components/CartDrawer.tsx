@@ -41,9 +41,9 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
       />
 
       {/* Drawer */}
-      <div className="fixed right-0 top-0 bottom-0 w-full md:w-96 bg-white z-50 shadow-2xl flex flex-col animate-slide-in">
+      <div className="fixed right-0 top-0 bottom-0 w-full md:w-96 bg-white z-50 shadow-2xl flex flex-col animate-slide-in rounded-l-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b">
+        <div className="flex items-center justify-between p-6 border-b border-gray-300">
           <h2 className="text-2xl font-bold">
             Your Cart ({cartCount})
           </h2>
@@ -67,7 +67,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               {cart.map((item) => (
                 <div
                   key={`${item.id}-${item.selectedSize || "default"}`}
-                  className="flex gap-4 border-b pb-4"
+                  className="flex gap-4 border-b border-gray-300 pb-4"
                 >
                   {/* Product Image */}
                   <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
@@ -101,7 +101,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                       </div>
                       <button
                         onClick={() => removeFromCart(item.id, item.selectedSize)}
-                        className="text-red-500 text-xs hover:text-red-700 transition"
+                        className="text-white bg-red-700 text-xs px-4 py-2 rounded-full transition hover:cursor-pointer"
                       >
                         Remove
                       </button>
@@ -114,7 +114,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
         </div>
 
         {/* Footer - Fixed */}
-        <div className="border-t p-6 bg-gray-50">
+        <div className="border-t border-gray-300 p-6 bg-gray-50">
           <div className="space-y-2 mb-4">
             <div className="flex justify-between text-sm">
               <span className="text-gray-600">Estimated Shipping</span>
@@ -129,7 +129,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           <Link href="/cart">
             <button
               onClick={onClose}
-              className="w-full bg-[#2A2C22] hover:bg-[#2A2C22] text-white font-semibold py-3 rounded-lg transition-colors"
+              className="w-full bg-[#2A2C22] hover:bg-[#2A2C22] text-white font-semibold py-3 rounded-full transition-colors hover:cursor-pointer"
             >
               View Cart
             </button>

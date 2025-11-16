@@ -116,7 +116,7 @@ export default function CartPage() {
                               onClick={() =>
                                 handleQuantityChange(item.id, item.quantity - 1, item.selectedSize)
                               }
-                              className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors"
+                              className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-100 transition-colors"
                               aria-label="Decrease quantity"
                             >
                               <Minus className="w-4 h-4" />
@@ -128,7 +128,7 @@ export default function CartPage() {
                               onClick={() =>
                                 handleQuantityChange(item.id, item.quantity + 1, item.selectedSize)
                               }
-                              className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors"
+                              className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-100 transition-colors"
                               aria-label="Increase quantity"
                             >
                               <Plus className="w-4 h-4" />
@@ -180,14 +180,14 @@ export default function CartPage() {
 
                 <button
                   onClick={() => router.push("/checkout")}
-                  className="w-full bg-[#2A2C22] hover:bg-[#2A2C22] text-white font-bold py-3 px-6 rounded-lg transition-colors mb-3"
+                  className="w-full bg-[#2A2C22] hover:bg-[#2A2C22] text-white font-bold py-3 px-6 rounded-full transition-colors mb-3 hover:cursor-pointer"
                 >
                   Proceed to Checkout
                 </button>
 
                 <button
                   onClick={() => router.push("/")}
-                  className="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors"
+                  className="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-full hover:cursor-pointer transition-colors"
                 >
                   Continue Shopping
                 </button>
