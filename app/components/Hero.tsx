@@ -1,16 +1,16 @@
 "use client";
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import logo from "../../public/Hero (2).png"
+import logo from "@/public/cozy3.png"
 
 export default function Hero() {
   return(
-    <section className="relative h-[80vh] flex items-center justify-center text-center">
+    <section className="relative h-[85vh] flex items-center justify-center text-center">
       <Image
         src={logo}
         alt="Cozy Oven"
         fill
-        className="object-cover"
+        className="object-contain"
         priority
       />
       <div className="absolute inset-0 bg-black/40"></div>

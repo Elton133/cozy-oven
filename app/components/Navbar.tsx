@@ -8,6 +8,8 @@ import { useAuth } from "../context/AuthContext";
 import CartDrawer from "./CartDrawer";
 import AuthModal from "./AuthModal";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import logo from "@/public/cozy3.png"
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -49,7 +51,7 @@ export default function Navbar() {
         {/* Left: Brand */}
         <div className="flex items-center gap-3">
           <Link href="/">
-            <span className="text-base md:text-lg font-semibold text-gray-800">Cozy Ovens</span>
+          <Image src={logo} width={100} height={100} alt="Logo" />
           </Link>
         </div>
 
