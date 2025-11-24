@@ -13,6 +13,7 @@ import {
   Package,
   BarChart3,
 } from "lucide-react";
+import Image from "next/image";
 
 // Mock data - replace with actual API calls
 const mockDashboardData = {
@@ -26,28 +27,28 @@ const mockDashboardData = {
     {
       id: 1,
       name: "Classic Banana Bread",
-      image: "/placeholder-bread.jpg",
+      image: "/white-chocolate.png",
       price: 25.99,
       inStock: true,
     },
     {
       id: 2,
       name: "Walnut Banana Bread",
-      image: "/placeholder-bread.jpg",
+      image: "/nutty.png",
       price: 29.99,
       inStock: true,
     },
     {
       id: 3,
       name: "Chocolate Chip Delight",
-      image: "/placeholder-bread.jpg",
+      image: "/coconut.png",
       price: 27.99,
       inStock: false,
     },
     {
       id: 4,
-      name: "Blueberry Banana Bread",
-      image: "/placeholder-bread.jpg",
+      name: "Fruity Banana Bread",
+      image: "/fruity.png",
       price: 28.99,
       inStock: true,
     },
@@ -154,7 +155,15 @@ export default function AdminDashboardPage() {
                 className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow"
               >
                 <div className="w-full h-32 bg-gray-200 rounded-lg mb-3 flex items-center justify-center">
-                  <Package className="w-12 h-12 text-gray-400" />
+                  <div className="w-full h-32 bg-gray-200 rounded-lg mb-3 relative overflow-hidden">
+                  <Image
+                    src={dish.image}
+                    alt={dish.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">{dish.name}</h3>
                 <div className="flex items-center justify-between">

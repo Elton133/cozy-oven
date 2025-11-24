@@ -9,6 +9,7 @@ import { loginSchema, LoginFormData } from "../../schemas/authSchema";
 import authService from "../../services/authService";
 import { useAuth } from "../../context/AuthContext";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -54,10 +55,9 @@ export default function AdminLoginPage() {
         <div className="bg-white rounded-2xl shadow-xl p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#2A2C22] rounded-full mb-4">
-              <Lock className="w-8 h-8 text-white" />
+            <div className="inline-flex items-center justify-center">
+              <Image src="/cozy3.png" alt="Cozy Oven Logo" width={80} height={50} />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Login</h1>
             <p className="text-gray-600">Sign in to access your dashboard</p>
           </div>
 

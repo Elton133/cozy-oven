@@ -17,6 +17,7 @@ import {
   X,
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
+import Image from "next/image";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -82,8 +83,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       <aside className="hidden lg:flex lg:flex-col lg:w-64 bg-white border-r border-gray-200 fixed h-full">
         {/* Logo/Brand */}
         <div className="p-6 border-b border-gray-200">
-          <h1 className="text-2xl font-bold text-[#2A2C22]">Cozy Oven</h1>
-          <p className="text-sm text-gray-600 mt-1">Admin Panel</p>
+          <Image src="/cozy3.png" alt="Cozy Oven Logo" width={100} height={60} />
         </div>
 
         {/* Navigation */}

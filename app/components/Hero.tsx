@@ -44,7 +44,7 @@ export default function Hero() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for banana bread, chocolate chip, walnut..."
-              className="w-full px-6 py-4 pr-12 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="w-full px-6 py-4 pr-12 rounded-full text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-white/50 border border-white"
             />
             <button
               type="submit"

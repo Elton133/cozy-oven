@@ -453,7 +453,7 @@ export default function Categories() {
     <>
       <div ref={sectionRef} className="flex flex-col items-center justify-center min-h-screen font-[Euclid-Circular-B] mt-12">
         <motion.div 
-          className="w-full max-w-7xl px-4 py-8"
+          className="w-full max-w-7xl px-4 md:py-8 "
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
@@ -463,7 +463,7 @@ export default function Categories() {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`md:text-3xl text-2xl font-bold transition-colors relative ${
+                className={`md:text-3xl text-lg font-bold transition-colors relative ${
                   activeCategory === category
                     ? "text-[#2A2C22]"
                     : "text-gray-400 hover:text-gray-600"
