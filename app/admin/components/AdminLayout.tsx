@@ -83,7 +83,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       <aside className="hidden lg:flex lg:flex-col lg:w-64 bg-white border-r border-gray-200 fixed h-full">
         {/* Logo/Brand */}
         <div className="p-6 border-b border-gray-200">
-          <Image src="/cozy3.png" alt="Cozy Oven Logo" width={100} height={60} />
+          <Image src="/cozy3.png" alt="Cozy Oven" width={100} height={60} />
         </div>
 
         {/* Navigation */}
