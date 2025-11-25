@@ -18,6 +18,7 @@ export interface Product {
   rating?: number;
   createdAt?: string;
   updatedAt?: string;
+  pagination?: number;
 }
 
 export interface CreateProductData {

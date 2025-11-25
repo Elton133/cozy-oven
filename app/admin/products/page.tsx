@@ -273,6 +273,8 @@ export default function ProductManagementPage() {
     setShowEditModal(true);
   };
 
+  console.log("Products:", products);
+
   return (
     <AdminLayout>
       {/* Toast Notifications */}
