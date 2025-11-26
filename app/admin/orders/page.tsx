@@ -14,6 +14,7 @@ import {
   XCircle,
   Truck,
 } from "lucide-react";
+import OrderCards from "./components/OrderCards";
 
 // Mock data - replace with actual API calls
 const mockOrders = [
@@ -208,9 +209,10 @@ export default function OrdersPage() {
           </div>
         </div>
 
-        {/* Orders Table */}
+        {/* Orders Table/Cards */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="overflow-x-auto">
+          {/* Desktop Table View */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
@@ -282,6 +284,17 @@ export default function OrdersPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile Cards View */}
+          <div className="md:hidden p-4">
+            <OrderCards
+              orders={filteredOrders}
+              onViewOrder={(order) => {
+                // TODO: Implement view order details
+                console.log("View order:", order);
+              }}
+            />
           </div>
 
           {/* Empty State */}

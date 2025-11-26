@@ -15,6 +15,7 @@ import {
   Plus,
   Minus,
 } from "lucide-react";
+import InventoryCards from "./components/InventoryCards";
 
 // Mock inventory data - replace with actual API calls
 const mockInventory = [
@@ -246,9 +247,10 @@ export default function InventoryPage() {
           </div>
         </div>
 
-        {/* Inventory Table */}
+        {/* Inventory Table/Cards */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="overflow-x-auto">
+          {/* Desktop Table View */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
@@ -344,6 +346,20 @@ export default function InventoryPage() {
             </table>
           </div>
 
+          {/* Mobile Cards View */}
+          <div className="md:hidden p-4">
+            <InventoryCards
+              items={filteredInventory}
+              onAdjustStock={handleStockAdjustment}
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+              adjustmentType={adjustmentType}
+              setAdjustmentType={setAdjustmentType}
+              adjustmentAmount={adjustmentAmount}
+              setAdjustmentAmount={setAdjustmentAmount}
+            />
+          </div>
+
           {/* Empty State */}
           {filteredInventory.length === 0 && (
             <div className="text-center py-12">
@@ -354,9 +370,9 @@ export default function InventoryPage() {
         </div>
       </div>
 
-      {/* Stock Adjustment Modal */}
+      {/* Stock Adjustment Modal - Only for Desktop */}
       {selectedItem && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="hidden md:flex fixed inset-0 bg-black/50 items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-md w-full p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Adjust Stock</h2>
             <p className="text-gray-600 mb-6">
