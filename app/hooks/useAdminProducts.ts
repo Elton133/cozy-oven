@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import productService, { Product, ProductsQueryParams } from "../services/productService";
 
 export const useAdminProducts = (params?: ProductsQueryParams) => {
@@ -14,7 +14,7 @@ export const useAdminProducts = (params?: ProductsQueryParams) => {
     hasPrevPage: false,
   });
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -28,11 +28,11 @@ export const useAdminProducts = (params?: ProductsQueryParams) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params?.page, params?.limit, params?.category, params?.sortBy, params?.order]);
 
   useEffect(() => {
     fetchProducts();
-  }, [params?.page, params?.limit, params?.category, params?.sortBy, params?.order]);
+  }, [fetchProducts]);
 
   return {
     products,

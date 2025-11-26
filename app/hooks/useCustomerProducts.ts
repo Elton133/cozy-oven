@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import customerProductService, { CustomerProductListResponse } from "../services/customerProductService";
+import { useState, useEffect, useCallback } from "react";
+import customerProductService from "../services/customerProductService";
 import { Product } from "../services/productService";
 
 interface UseCustomerProductsOptions {
@@ -23,7 +23,7 @@ export const useCustomerProducts = (options: UseCustomerProductsOptions = {}) =>
     hasPrevPage: false,
   });
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -37,13 +37,13 @@ export const useCustomerProducts = (options: UseCustomerProductsOptions = {}) =>
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, limit]);
 
   useEffect(() => {
     if (autoFetch) {
       fetchProducts();
     }
-  }, [page, limit, autoFetch]);
+  }, [autoFetch, fetchProducts]);
 
   return {
     products,
