@@ -104,7 +104,7 @@ export const orderService = {
   // Customer: Verify payment
   verifyPayment: async (reference: string): Promise<PaymentVerificationResponse> => {
     const response = await apiClient.get(
-      `/api/v1/store/customer/payment/verify?reference=${reference}`
+      `/api/v1/store/customer/payment/verify?reference=${encodeURIComponent(reference)}`
     );
     return response.data;
   },
