@@ -580,10 +580,8 @@ export default function CheckoutPage() {
   const { isAuthenticated, user } = useAuth();
   const [currentStep, setCurrentStep] = useState<CheckoutStep>("info");
   const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [deliveryFee] = useState(10);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const taxRate = 0.125;
 
   const [customerInfo, setCustomerInfo] = useState({
     name: user?.fullName || "",
@@ -602,6 +600,8 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState("hubtel");
 
   const subtotal = getCartTotal();
+  // Cap delivery fee at 40 cedis maximum
+  const deliveryFee = Math.min(10, 40);
   const total = subtotal + (deliveryMethod === "delivery" ? deliveryFee : 0);
 
   useEffect(() => {
@@ -670,14 +670,18 @@ export default function CheckoutPage() {
         throw new Error(checkoutResponse.message || "Failed to create order");
       }
 
-      const orderId = checkoutResponse.order._id;
+      // Use the orderId field (e.g., "CZ-850560") instead of _id for payment initiation
+      const orderId = checkoutResponse.order.orderId || checkoutResponse.order._id;
 
       // Initiate payment
       const paymentResponse = await orderService.initiatePayment(orderId);
       console.log("Payment initiation response:", paymentResponse);
 
-      if (paymentResponse.success && paymentResponse.authorizationUrl) {
-        window.location.href = paymentResponse.authorizationUrl;
+      // Handle different response structures - authorizationUrl can be at top level or in data
+      const authUrl = paymentResponse.authorizationUrl || paymentResponse.data?.authorizationUrl;
+      
+      if (paymentResponse.success && authUrl) {
+        window.location.href = authUrl;
       } else {
         throw new Error("Failed to initiate payment");
       }
