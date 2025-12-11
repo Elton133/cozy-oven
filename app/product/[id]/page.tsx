@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Star, ArrowLeft, ShoppingCart } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import QuantitySelector from "../../components/QuantitySelector";
@@ -23,9 +23,6 @@ export default function ProductDetails() {
   const imageRef = useRef(null);
   const detailsRef = useRef(null);
   const tabsRef = useRef(null);
-  const isImageInView = useInView(imageRef, { once: true, amount: 0.3 });
-  const isDetailsInView = useInView(detailsRef, { once: true, amount: 0.3 });
-  const isTabsInView = useInView(tabsRef, { once: true, amount: 0.3 });
 
   const productId = params.id as string;
   const { product, loading } = useCustomerProduct(productId);

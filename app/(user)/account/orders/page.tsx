@@ -5,9 +5,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { orderService, type Order } from "@/app/services/orderService";
 
-// Order status types
-type OrderStatus = "pending" | "preparing" | "on-delivery" | "delivered" | "cancelled";
-
 const getStatusInfo = (status: string) => {
   switch (status) {
     case "pending":
