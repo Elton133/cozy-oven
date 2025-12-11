@@ -20,17 +20,19 @@ export interface CheckoutRequest {
 export interface Order {
   _id: string;
   orderId: string;
-  customerId: string;
+  userId?: string;
+  customerId?: string;
   items: Array<{
     productId: string;
     name?: string;
     quantity: number;
     unitPrice: number;
-    total: number;
+    total?: number;
   }>;
   subtotal: number;
   deliveryFee: number;
-  total: number;
+  totalAmount?: number;
+  total?: number;
   deliveryAddress: string;
   contactNumber: string;
   paymentMethod: string;
@@ -44,8 +46,12 @@ export interface Order {
 export interface PaymentInitiationResponse {
   success: boolean;
   message: string;
+  data?: {
     authorizationUrl?: string;
     reference?: string;
+  };
+  authorizationUrl?: string;
+  reference?: string;
 }
 
 // Payment verification response
@@ -63,6 +69,7 @@ export interface PaymentVerificationResponse {
 export interface ApiResponse<T = unknown> {
   success: boolean;
   message: string;
+  data?: T;
   order?: T;
   pagination?: {
     currentPage: number;

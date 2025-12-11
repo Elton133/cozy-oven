@@ -11,12 +11,11 @@ import { useCart } from "../context/CartContext";
 export default function CartPage() {
   const router = useRouter();
   const { cart, updateQuantity, removeFromCart, getCartTotal } = useCart();
-  const [deliveryFee] = useState(10); // Fixed delivery fee for now
-  const taxRate = 0.125; // 12.5% tax
-
+  
   const subtotal = getCartTotal();
-  const tax = subtotal * taxRate;
-  const total = subtotal + tax + deliveryFee;
+  // Fixed delivery fee (capped at 40 cedis maximum)
+  const deliveryFee = 10;
+  const total = subtotal + deliveryFee;
 
   const handleQuantityChange = (productId: string, newQuantity: number, size?: string) => {
     if (newQuantity <= 0) {
@@ -163,10 +162,6 @@ export default function CartPage() {
                   <div className="flex justify-between text-gray-700">
                     <span>Subtotal</span>
                     <span>GHS {subtotal.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between text-gray-700">
-                    <span>Tax (12.5%)</span>
-                    <span>GHS {tax.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-gray-700">
                     <span>Delivery Fee</span>
