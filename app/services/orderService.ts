@@ -104,15 +104,11 @@ export interface ApiResponse<T = unknown> {
 // Admin order statistics
 export interface OrderStatistics {
   totalOrders: number;
-  pendingOrders: number;
-  preparingOrders: number;
-  onDeliveryOrders: number;
-  deliveredOrders: number;
-  cancelledOrders: number;
-  totalRevenue: number;
-  pending?: number;
-  preparing?: number;
-  delivered?: number;
+  pending: number;
+  preparing: number;
+  delivered: number;
+  cancelled?: number;
+  totalRevenue?: number;
 }
 
 // Admin get all orders response
