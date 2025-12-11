@@ -370,7 +370,20 @@ export default function CustomersPage() {
   const handleViewDetails = (customerId: number) => {
     const customer = mockCustomers.find(c => c.id === customerId)
     if (customer) {
-      alert(`Customer Details:\n\nName: ${customer.fullName}\nEmail: ${customer.email}\nPhone: ${customer.phoneNumber}\nTotal Orders: ${customer.totalOrders}\nTotal Spent: GHS ${customer.totalSpent.toFixed(2)}\nStatus: ${customer.status}\nJoined: ${new Date(customer.joinedDate).toLocaleDateString()}`)
+      // In a production app, this would open a proper modal
+      // For now, using a formatted alert as a placeholder
+      const details = [
+        `Customer Details`,
+        ``,
+        `Name: ${customer.fullName}`,
+        `Email: ${customer.email}`,
+        `Phone: ${customer.phoneNumber}`,
+        `Total Orders: ${customer.totalOrders}`,
+        `Total Spent: GHS ${customer.totalSpent.toFixed(2)}`,
+        `Status: ${customer.status}`,
+        `Joined: ${new Date(customer.joinedDate).toLocaleDateString()}`
+      ].join('\n')
+      alert(details)
     }
     setSelectedCustomer(null)
   }
@@ -378,15 +391,17 @@ export default function CustomersPage() {
   const handleSendEmail = (customerId: number) => {
     const customer = mockCustomers.find(c => c.id === customerId)
     if (customer) {
-      window.location.href = `mailto:${customer.email}`
+      // Opens default email client
+      window.location.href = `mailto:${customer.email}?subject=Cozy Oven - Customer Support`
     }
     setSelectedCustomer(null)
   }
 
   const handleDeactivate = (customerId: number) => {
     const customer = mockCustomers.find(c => c.id === customerId)
-    if (customer && confirm(`Are you sure you want to deactivate ${customer.fullName}?`)) {
-      alert(`Customer ${customer.fullName} has been deactivated. (This is a mock action)`)
+    if (customer && confirm(`Are you sure you want to deactivate ${customer.fullName}?\n\nThis action would normally update the customer's status in the database.`)) {
+      // In production, this would call an API
+      alert(`Customer ${customer.fullName} deactivated successfully.\n\n(Note: This is a mock action - customer data is not persisted)`)
     }
     setSelectedCustomer(null)
   }
