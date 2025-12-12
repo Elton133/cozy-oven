@@ -195,7 +195,6 @@ import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ProductQuickView from "./ProductQuickView";
 import type { Product } from "../context/CartContext";
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 

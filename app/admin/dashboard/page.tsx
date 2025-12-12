@@ -11,7 +11,6 @@ import {
   ArrowRight,
   Download,
   Package,
-  BarChart3,
   Loader2,
 } from "lucide-react";
 import Image from "next/image";
