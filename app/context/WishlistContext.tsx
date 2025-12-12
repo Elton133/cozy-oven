@@ -19,7 +19,16 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     // Load from localStorage initially
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("wishlist");
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (error) {
+          console.error("Error parsing wishlist from localStorage:", error);
+          // Clear corrupted data
+          localStorage.removeItem("wishlist");
+          return [];
+        }
+      }
     }
     return [];
   });
