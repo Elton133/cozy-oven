@@ -98,7 +98,7 @@ export default function AdminDashboardPage() {
               <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Popular This Week</p>
+                    <p className="text-sm font-medium text-gray-600">Best Seller</p>
                     <h3 className="text-lg font-bold text-gray-900 mt-2">
                       {dashboardData.popularProductThisWeek.name}
                     </h3>
