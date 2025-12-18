@@ -63,6 +63,7 @@ export interface ApiResponse {
 export const customerService = {
   // GET /api/v1/dashboard/admin/customers/overview - Get customer overview statistics
   getCustomerOverview: async (): Promise<GetCustomerOverviewResponse> => {
+    // Note: The API spec mentions "/customers/over" but it should be "/customers/overview"
     const response = await apiClient.get("/api/v1/dashboard/admin/customers/overview");
     return response.data;
   },
