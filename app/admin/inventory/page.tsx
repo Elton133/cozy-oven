@@ -24,7 +24,6 @@ export default function InventoryPage() {
   const { user, isAuthenticated } = useAuth();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [categoryFilter, setcategoryFilter] = useState<string>("all");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -66,7 +65,7 @@ export default function InventoryPage() {
       fetchInventory();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated, user, currentPage, statusFilter, categoryFilter]);
+  }, [isAuthenticated, user, currentPage, statusFilter]);
 
   const fetchInventory = async () => {
     try {
@@ -76,7 +75,6 @@ export default function InventoryPage() {
         limit: 10,
         search: searchQuery || undefined,
         status: statusFilter !== "all" ? statusFilter : undefined,
-        category: categoryFilter !== "all" ? categoryFilter : undefined,
       });
       if (response.success) {
         setInventory(response.data);
@@ -86,11 +84,6 @@ export default function InventoryPage() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleSearch = () => {
-    setCurrentPage(1);
-    fetchInventory();
   };
 
   const handleDelete = async (id: string) => {
@@ -328,6 +321,12 @@ export default function InventoryPage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    setCurrentPage(1);
+                    fetchInventory();
+                  }
+                }}
                 placeholder="Search by product name, SKU, or category..."
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
               />

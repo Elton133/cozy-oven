@@ -24,7 +24,6 @@ import reportsService, {
 export default function ReportsPage() {
   const { user, isAuthenticated } = useAuth();
   const router = useRouter();
-  const [dateRange, setDateRange] = useState("month");
   const [loading, setLoading] = useState(true);
   
   // Finance Summary State
@@ -99,8 +98,6 @@ export default function ReportsPage() {
   if (!isAuthenticated || user?.role !== "Admin") {
     return null;
   }
-
-  const totalSales = salesByCategory.reduce((acc, item) => acc + item.revenue, 0);
 
   return (
     <AdminLayout>
