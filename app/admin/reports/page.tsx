@@ -21,6 +21,17 @@ import reportsService, {
   type TopCustomer,
 } from "../../services/reportsService";
 
+// Color palette for category charts
+const CATEGORY_COLORS = [
+  "#2A2C22",
+  "#4CAF50",
+  "#2196F3",
+  "#FF9800",
+  "#9C27B0",
+  "#E91E63",
+  "#00BCD4",
+];
+
 export default function ReportsPage() {
   const { user, isAuthenticated } = useAuth();
   const router = useRouter();
@@ -133,7 +144,7 @@ export default function ReportsPage() {
                 onChange={(e) => setSelectedYear(Number(e.target.value))}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
               >
-                {[2024, 2025, 2026].map((year) => (
+                {Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - 2 + i).map((year) => (
                   <option key={year} value={year}>{year}</option>
                 ))}
               </select>
@@ -249,15 +260,7 @@ export default function ReportsPage() {
                       <div
                         className="w-4 h-4 rounded-full"
                         style={{
-                          backgroundColor: [
-                            "#2A2C22",
-                            "#4CAF50",
-                            "#2196F3",
-                            "#FF9800",
-                            "#9C27B0",
-                            "#E91E63",
-                            "#00BCD4",
-                          ][index % 7],
+                          backgroundColor: CATEGORY_COLORS[index % CATEGORY_COLORS.length],
                         }}
                       />
                       <span className="text-sm text-gray-700">{item.category}</span>
