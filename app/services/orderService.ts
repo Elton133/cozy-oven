@@ -25,8 +25,10 @@ export interface Order {
   customer?: string;
   email?: string;
   items?: string;         
-  total?: string;         
-  date?: string;          
+  total?: string;
+  amount?: string;        
+  date?: string;
+  paidAt?: string;          
 
   // Existing fields
   userId?: string;
