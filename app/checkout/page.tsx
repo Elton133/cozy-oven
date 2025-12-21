@@ -276,6 +276,7 @@ export default function CheckoutPage() {
                       }
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                       placeholder="John Doe"
+                      autoComplete="name"
                     />
                   </div>
                   <div>
@@ -290,6 +291,7 @@ export default function CheckoutPage() {
                       }
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                       placeholder="john@example.com"
+                      autoComplete="email"
                     />
                   </div>
                   <div>
@@ -304,8 +306,7 @@ export default function CheckoutPage() {
                       }
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                       placeholder="+233 123 456 789"
-                      pattern="[+]?[0-9\s\-()]+"
-                      title="Please enter a valid phone number"
+                      autoComplete="tel"
                     />
                   </div>
                 </div>
@@ -365,6 +366,7 @@ export default function CheckoutPage() {
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                         placeholder="123 Main Street"
+                        autoComplete="street-address"
                       />
                     </div>
                     <div>
@@ -382,6 +384,7 @@ export default function CheckoutPage() {
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                         placeholder="Accra"
+                        autoComplete="address-level2"
                       />
                     </div>
                   </div>
