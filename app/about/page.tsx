@@ -49,7 +49,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2A2C22] mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2A2C22] mb-6"
             >
               We&apos;re so glad you&apos;re here.
             </motion.h1>
@@ -57,7 +57,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg md:text-xl text-gray-700 leading-relaxed mb-4"
+              className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed mb-4"
             >
               Cozy Oven is built by a small but passionate team—warm, creative, and committed to giving you fresh, comforting baked goodness that truly makes your day better.
             </motion.p>
@@ -65,7 +65,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-lg md:text-xl text-gray-700 leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed"
             >
               Every loaf, every mini, every moment with Cozy Oven is crafted with one goal in mind: to bring comfort, joy, and quality you can taste.
             </motion.p>
@@ -98,10 +98,10 @@ export default function AboutPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="w-full md:w-3/4 flex flex-col justify-center"
               >
-                <h2 className="text-3xl md:text-5xl font-bold text-[#2A2C22] mb-6">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#2A2C22] mb-6">
                   How It Started
                 </h2>
-                <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+                <div className="space-y-4 text-gray-700 text-base sm:text-lg leading-relaxed">
                   <p>
                     Cozy Oven was born in a season that tested everything.
                   </p>
@@ -127,7 +127,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isWhyCozyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8 }}
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
             >
               Why &ldquo;Cozy&rdquo;?
             </motion.h2>
@@ -135,7 +135,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isWhyCozyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl mb-8"
+              className="text-lg sm:text-xl md:text-2xl mb-8"
             >
               Because comfort is powerful.
             </motion.p>
@@ -143,7 +143,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isWhyCozyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-left md:text-center space-y-3 text-lg md:text-xl"
+              className="text-left md:text-center space-y-3 text-base sm:text-lg md:text-xl"
             >
               <p>Cozy Oven represents that feeling of:</p>
               <p>✨ Warmth after a long day</p>
@@ -184,10 +184,10 @@ export default function AboutPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="w-full md:w-3/4 flex flex-col justify-center"
               >
-                <h2 className="text-3xl md:text-5xl font-bold text-[#2A2C22] mb-6">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#2A2C22] mb-6">
                   The Vision
                 </h2>
-                <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+                <div className="space-y-4 text-gray-700 text-base sm:text-lg leading-relaxed">
                   <p className="font-semibold">Our mission is simple:</p>
                   <p>
                     To bring comfort, ease, and joy to your everyday moments through high-quality, delicious banana bread.
@@ -216,7 +216,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isTaglineInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl md:text-6xl font-bold text-[#2A2C22] mb-8 italic"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#2A2C22] mb-8 italic"
             >
               Purposefully Baked. Thoughtfully Shared.
             </motion.h2>
@@ -224,7 +224,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isTaglineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="space-y-4 text-gray-700 text-lg md:text-xl leading-relaxed"
+              className="space-y-4 text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed"
             >
               <p>
                 Cozy Oven was designed to help you pause, enjoy, and savour the little things.
@@ -258,11 +258,11 @@ export default function AboutPage() {
                 transition={{ duration: 1, delay: 0.3 }}
                 className="relative z-10"
               >
-                <h2 className="text-3xl md:text-4xl font-bold text-[#2A2C22] mb-8 text-center">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2A2C22] mb-8 text-center">
                   From the Baker
                 </h2>
                 
-                <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
+                <div className="space-y-6 text-gray-700 text-base sm:text-lg leading-relaxed">
                   <motion.p
                     initial={{ opacity: 0, x: -20 }}
                     animate={isBakerInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}

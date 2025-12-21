@@ -60,6 +60,31 @@ export default function CheckoutPage() {
   const currentStepIndex = steps.findIndex((s) => s.id === currentStep);
 
   const handleNext = () => {
+    // Validate current step before proceeding
+    if (currentStep === "info") {
+      if (!customerInfo.name.trim() || !customerInfo.email.trim() || !customerInfo.phone.trim()) {
+        setError("Please fill in all required fields");
+        return;
+      }
+      // Validate email format
+      const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+      if (!emailRegex.test(customerInfo.email)) {
+        setError("Please enter a valid email address");
+        return;
+      }
+      setError(null);
+    } else if (currentStep === "delivery") {
+      if (deliveryMethod === "delivery" && (!deliveryDetails.address.trim() || !deliveryDetails.city.trim())) {
+        setError("Please fill in delivery address and city");
+        return;
+      }
+      if (!deliveryDetails.date || !deliveryDetails.time) {
+        setError("Please select delivery/pickup date and time");
+        return;
+      }
+      setError(null);
+    }
+
     const stepOrder: CheckoutStep[] = ["info", "delivery", "payment", "review"];
     const currentIndex = stepOrder.indexOf(currentStep);
     if (currentIndex < stepOrder.length - 1) {
@@ -185,7 +210,7 @@ export default function CheckoutPage() {
       <Navbar />
       <main className="min-h-screen pt-24 pb-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">Checkout</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8">Checkout</h1>
 
           {!isAuthenticated && (
             <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
@@ -209,6 +234,7 @@ export default function CheckoutPage() {
                   >
                     {index < currentStepIndex ? <Check className="w-5 h-5" /> : index + 1}
                   </div>
+                  <span className="text-xs mt-2 text-center block sm:hidden">{step.label.split(' ')[0]}</span>
                   <span className="text-xs mt-2 text-center hidden sm:block">{step.label}</span>
                 </div>
                 {index < steps.length - 1 && (
@@ -224,6 +250,13 @@ export default function CheckoutPage() {
 
           {/* Form Content */}
           <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-8">
+            {/* Error Message at top of form */}
+            {error && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-sm text-red-800">{error}</p>
+              </div>
+            )}
+
             {/* Customer Information */}
             {currentStep === "info" && (
               <div>
@@ -243,6 +276,7 @@ export default function CheckoutPage() {
                       }
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                       placeholder="John Doe"
+                      autoComplete="name"
                     />
                   </div>
                   <div>
@@ -257,6 +291,7 @@ export default function CheckoutPage() {
                       }
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                       placeholder="john@example.com"
+                      autoComplete="email"
                     />
                   </div>
                   <div>
@@ -271,6 +306,7 @@ export default function CheckoutPage() {
                       }
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                       placeholder="+233 123 456 789"
+                      autoComplete="tel"
                     />
                   </div>
                 </div>
@@ -330,6 +366,7 @@ export default function CheckoutPage() {
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                         placeholder="123 Main Street"
+                        autoComplete="street-address"
                       />
                     </div>
                     <div>
@@ -347,6 +384,7 @@ export default function CheckoutPage() {
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                         placeholder="Accra"
+                        autoComplete="address-level2"
                       />
                     </div>
                   </div>
@@ -366,6 +404,7 @@ export default function CheckoutPage() {
                           date: e.target.value,
                         })
                       }
+                      min={new Date().toISOString().split('T')[0]}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A2C22] focus:border-transparent"
                     />
                   </div>

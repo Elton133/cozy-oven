@@ -32,10 +32,10 @@ export default function CartPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <ShoppingBag className="w-24 h-24 text-gray-300 mb-6" />
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
                 Your basket&apos;s feeling lonely. Add some treats!
               </h2>
-              <p className="text-gray-600 mb-8 max-w-md">
+              <p className="text-sm sm:text-base text-gray-600 mb-8 max-w-md">
                 Browse our delicious selection of fresh-baked banana bread and pastries
               </p>
               <button
@@ -57,7 +57,7 @@ export default function CartPage() {
       <Navbar />
       <main className="min-h-screen pt-24 pb-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8">
             Shopping Cart
           </h1>
 

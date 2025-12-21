@@ -457,12 +457,12 @@ export default function Categories() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex md:gap-8 gap-4 mb-8">
+          <div className="flex md:gap-8 gap-4 mb-8 overflow-x-auto pb-2">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`md:text-3xl text-lg font-bold transition-colors relative ${
+                className={`md:text-3xl text-xl font-bold transition-colors relative whitespace-nowrap ${
                   activeCategory === category
                     ? "text-[#2A2C22]"
                     : "text-gray-400 hover:text-gray-600"
@@ -494,7 +494,7 @@ export default function Categories() {
               <motion.div
                 key={card.id}
                 variants={cardVariants}
-                className="relative overflow-hidden rounded-4xl text-white h-[500px] group cursor-pointer"
+                className="relative overflow-hidden rounded-4xl text-white h-[400px] sm:h-[450px] md:h-[500px] group cursor-pointer"
                 onClick={() => handleCardClick(card.id)}
               >
                 <div
@@ -505,8 +505,12 @@ export default function Categories() {
 
                 <div className="relative z-20 p-8 h-full flex flex-col">
                   <div className="mb-auto">
-                    <h2 className="text-4xl font-bold mb-4">{card.title}</h2>
-                    <p className="text-gray-300 text-lg font-extralight">{card.description}</p>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">
+                      {card.title}
+                    </h2>
+                    <p className="text-gray-300 text-sm sm:text-base md:text-lg font-extralight">
+                      {card.description}
+                    </p>
                   </div>
                   <div className="flex items-center gap-3">
                     {/* Button that slides up */}
