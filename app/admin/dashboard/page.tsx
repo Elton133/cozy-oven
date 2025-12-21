@@ -21,6 +21,9 @@ export default function AdminDashboardPage() {
   const router = useRouter();
   const [chartFilter, setChartFilter] = useState<"daily" | "monthly" | "overview">("monthly");
 
+  // Constants
+  const PRODUCT_ID_DISPLAY_LENGTH = 8;
+
   // Fetch real dashboard data
   const { data: dashboardData, loading: dashboardLoading } = useDashboardOverview();
   const { products: popularProducts, loading: productsLoading } = usePopularProducts(1, 4);
@@ -146,6 +149,15 @@ export default function AdminDashboardPage() {
                         alt={dashboardData.bestSellerThisMonth.name}
                         fill
                         className="object-cover"
+                        onError={(e) => {
+                          // Fallback to placeholder if image fails to load
+                          const target = e.currentTarget;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent) {
+                            parent.innerHTML = '<div class="w-full h-full flex items-center justify-center"><svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>';
+                          }
+                        }}
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
@@ -177,7 +189,7 @@ export default function AdminDashboardPage() {
                       <div className="bg-yellow-50 rounded-lg p-4">
                         <p className="text-sm text-gray-600 mb-1">Product ID</p>
                         <p className="text-lg font-bold text-yellow-600">
-                          {dashboardData.bestSellerThisMonth.productId?.slice(0, 8) || 'N/A'}...
+                          {dashboardData.bestSellerThisMonth.productId?.slice(0, PRODUCT_ID_DISPLAY_LENGTH) || 'N/A'}...
                         </p>
                         <p className="text-xs text-gray-500 mt-1">identifier</p>
                       </div>
