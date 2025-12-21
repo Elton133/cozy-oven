@@ -23,7 +23,7 @@ export default function CheckoutSuccessPage({
 
         <Link
           href="/"
-          className="inline-block rounded-md bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700 transition-colors"
+          className="inline-block rounded-md bg-[#2A2C22] px-6 py-3 text-white font-semibold hover:bg-[#1F2118] transition-colors"
         >
           Go back home
         </Link>
