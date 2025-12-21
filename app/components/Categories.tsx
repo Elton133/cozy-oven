@@ -199,7 +199,7 @@ import useCustomerProducts from "../hooks/useCustomerProducts";
 import 'react-loading-skeleton/dist/skeleton.css'
 
 
-type Category = "Banana Breads" | "Flight Box" | "Gift Box";
+type Category = "Banana Breads" | "Flight Box" | "Gift Box" | "Family Size";
 
 export default function Categories() {
   const [activeCategory, setActiveCategory] = useState<Category>("Banana Breads");
@@ -212,7 +212,7 @@ export default function Categories() {
   // Fetch products from backend
   const { products: allProducts, loading } = useCustomerProducts({ limit: 100 });
 
-  const categories: Category[] = ["Banana Breads", "Flight Box", "Gift Box"];
+  const categories: Category[] = ["Banana Breads", "Flight Box", "Gift Box", "Family Size"];
 
   // Filter products by category
   const getProductsByCategory = (category: Category) => {
@@ -224,6 +224,9 @@ export default function Categories() {
         return product.productCategory?.toLowerCase().includes("flight");
       } else if (category === "Gift Box") {
         return product.productCategory?.toLowerCase().includes("gift");
+      }
+      else if (category === "Family Size") {
+        return product.productCategory?.toLowerCase().includes("family");
       }
       return false;
     });

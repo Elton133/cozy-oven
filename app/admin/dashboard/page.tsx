@@ -360,14 +360,14 @@ export default function AdminDashboardPage() {
                     <div className="w-full bg-gray-100 rounded-t-lg relative group">
                       <div
                         className="w-full bg-[#2A2C22] rounded-t-lg transition-all duration-500 hover:bg-[#3a3c32]"
-                        style={{ height: `${maxValue > 0 ? (dataPoint.value / maxValue) * 280 : 0}px` }}
+                        style={{ height: `${maxValue > 0 ? (dataPoint?.value / maxValue) * 280 : 0}px` }}
                       >
                         <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
-                          GHS {dataPoint.value.toLocaleString()}
+                          GHS {dataPoint?.value?.toLocaleString()}
                         </div>
                       </div>
                     </div>
-                    <span className="text-xs font-medium text-gray-600">{dataPoint.label}</span>
+                    <span className="text-xs font-medium text-gray-600">{dataPoint?.label}</span>
                   </div>
                 ))}
               </div>
