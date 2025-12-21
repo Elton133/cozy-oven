@@ -22,13 +22,13 @@ export default function BestSellers() {
       >
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           <div className="lg:w-1/3 flex flex-col justify-center">
-            <p className="text-sm font-medium text-gray-600 mb-2">
+            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-2">
               What&apos;s Popular Now
             </p>
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
               Best Sellers
             </h2>
-            <p className="text-lg text-gray-700">
+            <p className="text-base sm:text-lg text-gray-700">
               Shop our most loved products.
             </p>
           </div>
@@ -62,10 +62,10 @@ export default function BestSellers() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6">
                         <div className="flex items-end justify-between">
                           <div>
-                            <h3 className="text-white text-2xl font-bold mb-2">
+                            <h3 className="text-white text-xl sm:text-2xl font-bold mb-2">
                               {product.productName}
                             </h3>
-                            <p className="text-white/80 text-sm font-medium">
+                            <p className="text-white/80 text-xs sm:text-sm font-medium">
                               GHS {product.price.toFixed(2)}
                             </p>
                           </div>

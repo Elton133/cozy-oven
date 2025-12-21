@@ -144,13 +144,13 @@ export default function ProductDetails() {
  
               className="flex flex-col"
             >
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{product.productName}</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">{product.productName}</h1>
 
               <div className="mb-4">{renderStars(product.rating || DEFAULT_RATING)}</div>
 
-              <p className="text-3xl font-bold text-orange-500 mb-6">GHS {product.price.toFixed(2)}</p>
+              <p className="text-2xl sm:text-3xl font-bold text-orange-500 mb-6">GHS {product.price.toFixed(2)}</p>
 
-              <p className="text-gray-700 mb-6">{product.productDetails}</p>
+              <p className="text-sm sm:text-base text-gray-700 mb-6">{product.productDetails}</p>
 
               <div className="mb-6">
                 <label className="block text-sm font-semibold text-gray-700 mb-3">Size</label>

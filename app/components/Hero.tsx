@@ -33,8 +33,8 @@ export default function Hero() {
         transition={{ duration: 1 }}
         className="relative z-10 text-white px-4 max-w-3xl mx-auto"
       >
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">Welcome to Cozy Oven! What&apos;s your banana bread craving for today?</h1>
-        <p className="text-lg md:text-2xl mb-6">Discover the best banana bread in Ghana</p>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">Welcome to Cozy Oven! What&apos;s your banana bread craving for today?</h1>
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6">Discover the best banana bread in Ghana</p>
         
         {/* Search Bar */}
         <form onSubmit={handleSearch} className="mb-6">
@@ -43,7 +43,7 @@ export default function Hero() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for banana bread, chocolate chip, walnut..."
+              placeholder="Search banana bread flavors..."
               className="w-full px-6 py-4 pr-12 rounded-full text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-white/50 border border-white"
             />
             <button
