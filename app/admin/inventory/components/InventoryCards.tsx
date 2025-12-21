@@ -65,8 +65,7 @@ export default function InventoryCards({
       {items.map((item) => (
         <div
           key={item.id}
-          className="bg-white rounded-xl shadow-sm border border-gray-100 p-4"
-        >
+          className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
           {/* Header */}
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-center gap-3">
@@ -110,7 +109,7 @@ export default function InventoryCards({
             </div>
             <div>
               <p className="text-xs text-gray-500 mb-1">Unit Cost</p>
-              <p className="text-sm font-semibold text-gray-900">GHS {item.unitCost.toFixed(2)}</p>
+              <p className="text-sm font-semibold text-gray-900">GHS {item?.unitCost?.toFixed(2)}</p>
             </div>
           </div>
 

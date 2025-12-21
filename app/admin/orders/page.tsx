@@ -312,7 +312,7 @@ export default function OrdersPage() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div>
-                          <p className="text-sm font-medium text-gray-900">{order.contactNumber}</p>
+                          <p className="text-sm font-medium text-gray-900">{order.customer}</p>
                           <p className="text-xs text-gray-500">{order.deliveryAddress}</p>
                         </div>
                       </td>
@@ -344,7 +344,7 @@ export default function OrdersPage() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="text-sm text-gray-500">
-                          {order.createdAt ? new Date(order.createdAt).toLocaleDateString() : "-"}
+                          {order.date ? new Date(order.date).toLocaleDateString() : "-"}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">

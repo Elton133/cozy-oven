@@ -83,7 +83,7 @@ export const customerService = {
     if (params?.status) queryParams.append("status", params.status);
 
     const response = await apiClient.get(
-      `/api/v1/dashboard/admin/customer${queryParams.toString() ? `?${queryParams.toString()}` : ""}`
+      `/api/v1/dashboard/admin/customers${queryParams.toString() ? `?${queryParams.toString()}` : ""}`
     );
     return response.data;
   },
