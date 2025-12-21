@@ -1,4 +1,4 @@
-import React from 'react'
+import Link from 'next/link';
 
 export default function CheckoutSuccessPage({
   searchParams,
@@ -7,7 +7,7 @@ export default function CheckoutSuccessPage({
 }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50">
-      <div className="p-8 bg-white rounded-lg shadow-md">
+      <div className="p-8 bg-white rounded-lg shadow-md text-center">
         <h1 className="text-2xl font-bold mb-2">Payment successful 🎉</h1>
 
         <p className="text-zinc-600 mb-4">
@@ -15,12 +15,19 @@ export default function CheckoutSuccessPage({
         </p>
 
         {searchParams.checkoutid && (
-          <p className="text-sm text-zinc-500">
-            Reference: <span className="font-mono">{searchParams.checkoutid}</span>
+          <p className="text-sm text-zinc-500 mb-6">
+            Reference:{' '}
+            <span className="font-mono">{searchParams.checkoutid}</span>
           </p>
         )}
+
+        <Link
+          href="/"
+          className="inline-block rounded-md bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700 transition-colors"
+        >
+          Go back home
+        </Link>
       </div>
     </div>
   );
 }
-
