@@ -188,7 +188,7 @@
 
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Search } from "lucide-react";
@@ -200,7 +200,6 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 
 export default function Categories() {
-  const [activeCategory, setActiveCategory] = useState<string>("");
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const router = useRouter();
@@ -221,19 +220,17 @@ export default function Categories() {
     return Array.from(categoriesSet).sort();
   }, [allProducts]);
 
-  // Set first available category as active when categories load
-  useEffect(() => {
-    if (availableCategories.length > 0 && !activeCategory) {
-      setActiveCategory(availableCategories[0]);
-    }
-  }, [availableCategories, activeCategory]);
+  const [activeCategory, setActiveCategory] = useState<string>("");
+
+  // Use first available category if active category is empty
+  const effectiveActiveCategory = activeCategory || (availableCategories.length > 0 ? availableCategories[0] : "");
 
   // Filter products by category
   const getProductsByCategory = (category: string) => {
     return allProducts.filter(product => product.productCategory === category);
   };
 
-  const currentProducts = activeCategory ? getProductsByCategory(activeCategory) : [];
+  const currentProducts = effectiveActiveCategory ? getProductsByCategory(effectiveActiveCategory) : [];
 
   const handleQuickView = (product: typeof allProducts[0]) => {
     const productData: Product = {
@@ -286,13 +283,13 @@ export default function Categories() {
                   key={category}
                   onClick={() => setActiveCategory(category)}
                   className={`md:text-3xl text-xl font-bold transition-colors relative whitespace-nowrap ${
-                    activeCategory === category
+                    effectiveActiveCategory === category
                       ? "text-[#2A2C22]"
                       : "text-gray-400 hover:text-gray-600"
                   }`}
                 >
                   {category}
-                  {activeCategory === category && (
+                  {effectiveActiveCategory === category && (
                   <motion.span
                     className="absolute bottom-0 left-0 right-0 h-1 bg-[#2A2C22] rounded-full origin-left"
                     initial={{ scaleX: 0 }}

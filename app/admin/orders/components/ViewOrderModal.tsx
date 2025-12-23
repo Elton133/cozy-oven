@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Package, User, MapPin, CreditCard, Loader2 } from "lucide-react";
+import { X, Package, User, CreditCard, Loader2 } from "lucide-react";
 import { orderService } from "../../../services/orderService";
 import Image from "next/image";
 
