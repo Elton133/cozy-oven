@@ -21,16 +21,11 @@ export default function ProductDetails() {
   const { addToCart } = useCart();
 
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
-
   const { product, loading } = useCustomerProduct(id as string);
-
-  // ✅ Select first size by default
-  useEffect(() => {
-    if (product?.selectOptions?.length && !selectedSize) {
-      setSelectedSize(product.selectOptions[0].label);
-    }
-  }, [product, selectedSize]);
+  
+  const [selectedSize, setSelectedSize] = useState<string | null>(
+    product?.selectOptions?.[0]?.label ?? null
+  );
 
   // ✅ FINAL PRICE = size price (not base + size)
   const currentPrice = (() => {
