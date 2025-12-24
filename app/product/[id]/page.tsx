@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Star, ArrowLeft, ShoppingCart } from "lucide-react";
@@ -18,7 +18,7 @@ export default function ProductDetails() {
   const router = useRouter();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState("Regular");
+  const [selectedSize, setSelectedSize] = useState<string>("");
 
   const imageRef = useRef(null);
   const detailsRef = useRef(null);
@@ -26,6 +26,24 @@ export default function ProductDetails() {
 
   const productId = params.id as string;
   const { product, loading } = useCustomerProduct(productId);
+
+  // Set default size when product loads
+  useEffect(() => {
+    if (product && product.selectOptions && product.selectOptions.length > 0 && !selectedSize) {
+      setSelectedSize(product.selectOptions[0].label);
+    }
+  }, [product, selectedSize]);
+
+  // Calculate current price based on selected size
+  const getCurrentPrice = () => {
+    if (!product) return 0;
+    
+    const basePrice = product.price;
+    const selectedOption = product.selectOptions?.find(opt => opt.label === selectedSize);
+    const additionalPrice = selectedOption?.additionalPrice || 0;
+    
+    return basePrice + additionalPrice;
+  };
 
   // Constants for fallback values
   const DEFAULT_RATING = 4.5;
@@ -97,11 +115,13 @@ export default function ProductDetails() {
   };
 
   const handleAddToCart = () => {
+    const currentPrice = getCurrentPrice();
+    
     // Map backend product to cart item format
     const cartItem = {
       id: product._id,
       name: product.productName,
-      price: `GHS ${product.price.toFixed(2)}`,
+      price: `GHS ${currentPrice.toFixed(2)}`,
       image: product.productThumbnail,
       description: product.productDetails || "",
       rating: product.rating || DEFAULT_RATING,
@@ -148,7 +168,7 @@ export default function ProductDetails() {
 
               <div className="mb-4">{renderStars(product.rating || DEFAULT_RATING)}</div>
 
-              <p className="text-2xl sm:text-3xl font-bold text-orange-500 mb-6">GHS {product.price.toFixed(2)}</p>
+              <p className="text-2xl sm:text-3xl font-bold text-orange-500 mb-6">GHS {getCurrentPrice().toFixed(2)}</p>
 
               <p className="text-sm sm:text-base text-gray-700 mb-6">{product.productDetails}</p>
 
