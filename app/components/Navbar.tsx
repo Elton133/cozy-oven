@@ -176,13 +176,13 @@ export default function Navbar() {
                   </div>
                 )}
 
-                {!searchLoading && searchQuery && searchResults.length === 0 && (
+                {!searchLoading && searchQuery && searchResults?.length === 0 && (
                   <div className="p-4 text-center text-sm text-gray-500">
                     No products found
                   </div>
                 )}
 
-                {!searchLoading && searchResults.length > 0 && (
+                {!searchLoading && searchResults?.length > 0 && (
                   <div className="max-h-96 overflow-y-auto">
                     {searchResults.map((product) => (
                       <button
