@@ -66,7 +66,7 @@ export default function BestSellers() {
                               {product.productName}
                             </h3>
                             <p className="text-white/80 text-xs sm:text-sm font-medium">
-                              GHS {product.price.toFixed(2)}
+                              GHS {product?.price?.toFixed(2)}
                             </p>
                           </div>
                           {/* Arrow icon */}

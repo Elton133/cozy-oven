@@ -94,11 +94,7 @@ export const productService = {
 
   // POST /api/v1/dashboard/admin/products - Create new product
   createProduct: async (productData: CreateProductData): Promise<ProductResponse> => {
-    const response = await apiClient.post("/api/v1/dashboard/admin/products", productData, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await apiClient.post("/api/v1/dashboard/admin/products", productData);
     return response.data;
   },
 
@@ -115,12 +111,7 @@ export const productService = {
   ): Promise<ProductResponse> => {
     const response = await apiClient.patch(
       `/api/v1/dashboard/admin/products/${productId}`,
-      productData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+      productData
     );
     return response.data;
   },

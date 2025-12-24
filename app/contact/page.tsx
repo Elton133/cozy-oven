@@ -112,27 +112,6 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Business Hours */}
-              <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-                  Business Hours
-                </h2>
-                <div className="space-y-3 text-gray-600">
-                  <div className="flex justify-between">
-                    <span className="font-medium">Monday - Friday</span>
-                    <span>8:00 AM - 3:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-medium">Saturday</span>
-                    <span>By Appointment</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-medium">Sunday</span>
-                    <span>Closed</span>
-                  </div>
-                </div>
-              </div>
             </motion.div>
 
             {/* Contact Form */}

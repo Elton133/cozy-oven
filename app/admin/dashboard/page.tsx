@@ -279,7 +279,7 @@ export default function AdminDashboardPage() {
                     <h3 className="font-semibold text-gray-900 mb-2">{product.productName}</h3>
                     <div className="flex items-center justify-between">
                       <span className="text-lg font-bold text-[#2A2C22]">
-                        GHS {product.price.toFixed(2)}
+                        GHS {product?.price?.toFixed(2)}
                       </span>
                       <span className="text-xs font-medium px-2 py-1 rounded-full bg-green-100 text-green-700">
                         {product.totalQuantitySold} sold

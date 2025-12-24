@@ -16,7 +16,6 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   const { cart, getCartCount, getCartTotal, updateQuantity, removeFromCart } = useCart();
   const cartCount = getCartCount();
   const cartTotal = getCartTotal();
-  const estimatedShipping = 10; // Fixed shipping cost
 
   useEffect(() => {
     if (isOpen) {
@@ -116,13 +115,9 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
         {/* Footer - Fixed */}
         <div className="border-t border-gray-300 p-6 bg-gray-50">
           <div className="space-y-2 mb-4">
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Estimated Shipping</span>
-              <span className="font-semibold">GHS {estimatedShipping}</span>
-            </div>
             <div className="flex justify-between text-lg font-bold">
-              <span>Estimated Total</span>
-              <span className="text-[#2A2C22]">GHS {(cartTotal + estimatedShipping).toFixed(2)}</span>
+              <span>Total</span>
+              <span className="text-[#2A2C22]">GHS {cartTotal.toFixed(2)}</span>
             </div>
           </div>
           

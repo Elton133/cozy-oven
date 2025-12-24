@@ -12,9 +12,7 @@ export default function CartPage() {
   const { cart, updateQuantity, removeFromCart, getCartTotal } = useCart();
   
   const subtotal = getCartTotal();
-  // Fixed delivery fee (capped at 40 cedis maximum)
-  const deliveryFee = 10;
-  const total = subtotal + deliveryFee;
+  const total = subtotal;
 
   const handleQuantityChange = (productId: string, newQuantity: number, size?: string) => {
     if (newQuantity <= 0) {
@@ -161,10 +159,6 @@ export default function CartPage() {
                   <div className="flex justify-between text-gray-700">
                     <span>Subtotal</span>
                     <span>GHS {subtotal.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between text-gray-700">
-                    <span>Delivery Fee</span>
-                    <span>GHS {deliveryFee.toFixed(2)}</span>
                   </div>
                   <div className="border-t pt-3 flex justify-between text-lg font-bold text-gray-900">
                     <span>Total</span>

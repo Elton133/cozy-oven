@@ -51,7 +51,7 @@ export default function ProductGrid({ products, onEdit, onDelete }: ProductGridP
             <p className="text-sm text-gray-600 mb-2">{product.productCategory}</p>
             <div className="flex items-center justify-between mb-3">
               <span className="text-lg font-bold text-[#2A2C22]">
-                GHS {product.price.toFixed(2)}
+                GHS {product?.price?.toFixed(2)}
               </span>
               {product.stockQuantity !== undefined && (
                 <span className="text-sm text-gray-600">

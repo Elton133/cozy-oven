@@ -6,22 +6,7 @@ export const useProductManagement = () => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const createProduct = async (productData: CreateProductData) => {
-    try {
-      setLoading(true);
-      setError(null);
-      setSuccess(null);
-      const response = await productService.createProduct(productData);
-      setSuccess("Product created successfully!");
-      return response;
-    } catch (err) {
-      console.error("Error creating product:", err);
-      setError("Failed to create product. Please try again.");
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   const createProductWithImage = async (formData: FormData) => {
     try {
@@ -83,7 +68,6 @@ export const useProductManagement = () => {
     loading,
     error,
     success,
-    createProduct,
     createProductWithImage,
     updateProduct,
     updateProductWithImage,
