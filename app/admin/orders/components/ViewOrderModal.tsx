@@ -34,6 +34,7 @@ interface OrderDetails {
     contactNumber: string;
     deliveryAddress: string;
     city?: string;
+    specialInstructions?: string;
   };
   items: OrderItem[];
   orderDetails?: OrderDetailsData;
@@ -76,6 +77,8 @@ export default function ViewOrderModal({ orderId, onClose }: ViewOrderModalProps
       setLoading(true);
       setError(null);
       const response = await orderService.getOrderById(orderId);
+
+      console.log("Order Details:", response);
       
       if (response.success && response.data) {
         setOrderDetails(response.data as OrderDetails);
@@ -91,6 +94,8 @@ export default function ViewOrderModal({ orderId, onClose }: ViewOrderModalProps
   };
 
   if (!orderId) return null;
+
+  
 
   return (
     <AnimatePresence>
@@ -181,11 +186,7 @@ export default function ViewOrderModal({ orderId, onClose }: ViewOrderModalProps
                       <p className="text-xs text-gray-600">Delivery Address</p>
                       <p className="text-sm font-medium text-gray-900">{orderDetails.customer.deliveryAddress}</p>
                     </div>
-                    <div>
-                      <p className="text-xs text-gray-600">Delivery Address</p>
-                      <p className="text-sm font-medium text-gray-900">{orderDetails.customer.deliveryAddress}</p>
-                      
-                    </div>
+                   
                     {orderDetails.customer.city && (
                       <div>
                         <p className="text-xs text-gray-600">City</p>
@@ -217,7 +218,7 @@ export default function ViewOrderModal({ orderId, onClose }: ViewOrderModalProps
                   <div className="space-y-3">
                     {orderDetails.items.map((item, index) => (
                       <div key={`${item.productId}-${index}`} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-                        <div className="w-16 h-16 bg-gray-200 rounded-lg relative overflow-hidden flex-shrink-0">
+                        <div className="w-16 h-16 bg-gray-200 rounded-lg relative overflow-hidden shrink-0">
                           {item.thumbnail ? (
                             <Image
                               src={item.thumbnail}
@@ -251,26 +252,22 @@ export default function ViewOrderModal({ orderId, onClose }: ViewOrderModalProps
                 </div>
 
                 {/* Pickup Details */}
-                {orderDetails.orderDetails?.pickUpDetails && (
+                {(orderDetails.orderDetails?.pickUpDetails || orderDetails.customer.deliveryAddress === "Pickup from store") && (
                   <div className="p-4 bg-gray-50 rounded-lg">
                     <h4 className="text-sm font-semibold text-gray-900 mb-3">Pickup Details</h4>
                     <div className="space-y-2">
-                      {orderDetails.orderDetails.pickUpDetails.pickupDate && (
-                        <div>
-                          <p className="text-xs text-gray-600">Pickup Date</p>
-                          <p className="text-sm font-medium text-gray-900">
-                            {orderDetails.orderDetails.pickUpDetails.pickupDate}
-                          </p>
-                        </div>
-                      )}
-                      {orderDetails.orderDetails.pickUpDetails.specialInstructions && (
-                        <div>
-                          <p className="text-xs text-gray-600">Special Instructions</p>
-                          <p className="text-sm font-medium text-gray-900">
-                            {orderDetails.orderDetails.pickUpDetails.specialInstructions}
-                          </p>
-                        </div>
-                      )}
+                      <div>
+                        <p className="text-xs text-gray-600">Pickup Date</p>
+                        <p className="text-sm font-medium text-gray-900">
+                          {orderDetails.orderDetails?.pickUpDetails?.pickupDate || "Not specified"}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-600">Special Instructions</p>
+                        <p className="text-sm font-medium text-gray-900">
+                          {orderDetails.orderDetails?.pickUpDetails?.specialInstructions || "None"}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )}
